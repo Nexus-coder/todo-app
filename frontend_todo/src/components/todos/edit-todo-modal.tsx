@@ -1,72 +1,83 @@
-import { useState } from 'react'
+//@ts-nocheck
+
+import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { PlusCircle } from "lucide-react"
-import { Label } from './ui/label'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Label } from '../ui/label'
+import useTodoStore from '@/context/store'
 
-interface AddTodoModalProps {
-    onAddTodo: (text: string, title: string) => void
+type Todo = {
+    _id: number
+    title: string
+    description: string
+    completed: boolean
 }
 
-export default function AddTodoModal({ onAddTodo }: AddTodoModalProps) {
-    const [newTodo, setNewTodo] = useState("");
-    const [newTitle, setNewTitle] = useState("");
-    const [open, setOpen] = useState(false)
+interface EditTodoModalProps {
+    isOpen: boolean
+    onClose: () => void
+    onEdit: (title: string, description: string) => void
+    todo: Todo | null
+}
 
-    const handleSubmit = (e: React.FormEvent) => {
+export default function EditTodoModal({ isOpen, onClose, todo, onEdit }: EditTodoModalProps) {
+    const [editedText, setEditedText] = useState("")
+    const [editedTitle, setEditedTitle] = useState("")
+
+    useEffect(() => {
+        if (todo) {
+            setEditedText(todo.description)
+            setEditedTitle(todo.title)
+        }
+    }, [todo])
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        if (newTodo.trim()) {
-            onAddTodo(newTodo, newTitle);
-            setNewTodo("")
-            setOpen(false)
+        if (todo && editedText.trim()) {
+            onEdit(editedTitle, editedText.trim())
+            onClose()
         }
     }
 
     return (
-        <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-                    <PlusCircle className="mr-2 h-4 w-4" />
-                    Add Todo
-                </Button>
-            </DialogTrigger>
+        <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent className="sm:max-w-[425px] bg-zinc-800 text-zinc-100 border-zinc-700">
                 <DialogHeader>
-                    <DialogTitle className="text-lg font-semibold text-zinc-100">Add a new todo</DialogTitle>
+                    <DialogTitle className="text-lg font-semibold text-zinc-100">Edit todo</DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="space-y-4 mt-4">
                     <Label>Title</Label>
                     <Input
                         type="text"
                         placeholder="Add the title here"
-                        value={newTitle}
-                        onChange={(e) => setNewTitle(e.target.value)}
+                        value={editedTitle}
+                        onChange={(e) => setEditedTitle(e.target.value)}
                         className="bg-zinc-700 border-zinc-600 text-zinc-100 placeholder-zinc-400"
                     />
                     <Label>Todo</Label>
                     <Input
                         type="text"
                         placeholder="Add a new todo here"
-                        value={newTodo}
-                        onChange={(e) => setNewTodo(e.target.value)}
+                        value={editedText}
+                        onChange={(e) => setEditedText(e.target.value)}
                         className="bg-zinc-700 border-zinc-600 text-zinc-100 placeholder-zinc-400"
                     />
                     <div className="flex justify-end space-x-2">
                         <Button
                             type="button"
                             variant="ghost"
-                            onClick={() => setOpen(false)}
+                            onClick={onClose}
                             className="text-zinc-300 hover:text-zinc-100 hover:bg-zinc-700"
                         >
                             Cancel
                         </Button>
                         <Button
+                            onClick={handleSubmit}
                             type="submit"
                             className="bg-blue-600 hover:bg-blue-700 text-white"
-                            onClick={handleSubmit}
                         >
-                            Add
+                            Save
                         </Button>
                     </div>
                 </form>

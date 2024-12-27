@@ -9,13 +9,16 @@
     "install": "npm run install-frontend && npm run install-backend",
     "backend": "npm run watch --prefix backend_todo",
     "frontend": "npm run dev --prefix frontend_todo",
-    "backend-deploy":"npm run start --prefix backend_todo",
-    "deploy":"npm run build --prefix frontend_todo && npm run backend-deploy",
-    "deploy-cluster":"npm run build --prefix frontend_todo && npm run backend-deploy",
+    "backend-deploy": "npm run start --prefix backend_todo",
+    "deploy": "npm run build --prefix frontend_todo && npm run backend-deploy",
+    "deploy-cluster": "npm run build --prefix frontend_todo && npm run backend-deploy",
     "watch": "npm run backend & npm run frontend",
     "test": "npm run test --prefix backend_todo && npm run test --prefix frontend_todo"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.9"
+  }
 }

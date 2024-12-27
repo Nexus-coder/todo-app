@@ -126,16 +126,17 @@ We can use ```bash pm2 reload server``` to show a beautiful monitor to use
 This is the best way for live servers with users
 
 ### Sessions 
-This is data that is useful to the user while they are browsing
+This is data that is useful to the user while they are browsing ou application.
+
 For example a user when they are buying items in an e-commerce store.
 Store data about the current web user that is logged in to the application.
 we have two types of sessions a client side session and a server side session in reference to where the data is stored.
 When we use the client then cookies are used as our sessions.
 
-Depeding on the one of the methods listed above we either use staefu cookies or stateless cookies.
+Depending on the one of the methods listed above we either use staeful cookies or stateless cookies.
 A stateful cookie is one that holds some id to a session that lives somewhere on the server
 We use them when doing server side sessions.
-So the id is loooked up on the session database however it can be hard to scale since it would mean performing reads and writes on every user 
+So the id is loooked up on the session database however it can be hard to scale since it would mean performing reads and writes on every user.
 
 Stateless cookies/ Client side cookies
 All the information needed lives on the client side already
@@ -146,12 +147,14 @@ The server signs the coolie with a secret that is only available to the server.
 There are different benefits to storing the sessions in the above ways.
 If we are concerned about the data in our session then we can keep the information on the server side.
 Also when we are playing a game its ok for a user to see their score but it is not ok for them to change their score.
-Only the server has a key to sign the cookie this siplifies our backend.
+Only the server has a key to sign the cookie this simplifies our backend.
+
 Cookies are limited by size by the server. 
 
-We also do not need to waste a lot of data sending the
+We also do not need to waste a lot of data sending the cookie.
+
 ### Serving the frontend via the express application
-Just build the frontend and serve the assets and build via te express app.
+Just build the frontend and serve the assets and build via the express app.
 
 ### Organization
 

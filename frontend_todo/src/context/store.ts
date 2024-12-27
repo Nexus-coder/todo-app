@@ -1,14 +1,18 @@
 //@ts-nocheck
-import { create } from 'zustand'
 
+import { getTodos } from '@/api/todos/get-todos';
+
+import { create } from 'zustand'
+console.log('in store')
 const useTodoStore = create((set) => ({
     todos: [],
     // Fetch todos from the backend
     fetchTodos: async () => {
         try {
             const response = await fetch('https://localhost:3000/todos'); // Adjust the endpoint accordingly
-            const todos = await response.json();
-            set({ todos });
+            console.log('This is the response',response)
+            const todos = await getTodos();
+            set({ todos: todos });
         } catch (error) {
             console.error('Failed to fetch todos:', error);
         }
