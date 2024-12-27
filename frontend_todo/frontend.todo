@@ -1,0 +1,13 @@
+Frontend Todo:
+        ✔ Create a new todo @done(24-12-27 13:35)
+        ✔ Update a todo @done(24-12-27 13:35)
+        ✔ Delete a todo @done(24-12-27 13:35)
+        ✔ List all todos @done(24-12-27 13:35)
+        ☐ Mark a todo as done
+        ☐ Mark a todo as undone
+        ☐ List all done todos
+        ☐ List all undone todos
+        ☐ Search for todos using semantic search
+        ☐ Add user authentication
+        ☐ Add collaborators to a todo and help someone complete it
+    

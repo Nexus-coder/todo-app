@@ -57,4 +57,9 @@ app.get("/", (req, res) => {
   res.render(path.join(__dirname, "..", "public"));
 });
 
+// Fallback for client-side routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, "..","public",'index.html'));
+});
+
 module.exports = app;
