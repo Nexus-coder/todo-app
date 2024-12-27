@@ -29,7 +29,6 @@ async function connectToMongoDB() {
         console.log(`Listening on port ${PORT}`);
       })
     } else {
-
       const HTTPSServer = https.createServer({
         cert: fs.readFileSync('cert.pem'),
         key: fs.readFileSync('key.pem')
