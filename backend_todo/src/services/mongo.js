@@ -1,7 +1,9 @@
-require('dotenv').config()
 const mongoose = require("mongoose");
 
-export const isProduction = process.env.NODE_ENV == 'production'
+require('dotenv').config()
+
+const isProduction = process.env.NODE_ENV == 'production'
+
 const mongoURI = isProduction ? process.env.MONGO_DB_URL : `mongodb://127.0.0.1:27017/todoApp`;
 
 mongoose.connection.once("on", () => {
@@ -23,5 +25,6 @@ async function mongoDisconnect() {
 
 module.exports = {
   mongoConnect,
+  isProduction,
   mongoDisconnect
 };
