@@ -62,7 +62,7 @@ export default function Todo({ todo }: { todo: Todo }) {
     }
     return (
         <>
-            <div className="flex items-center gap-3 bg-zinc-800 p-4 rounded-lg">
+            <div className="border border-2 border-red-400 flex items-center gap-3 bg-zinc-800 p-4 rounded-lg">
                 <Checkbox
                     checked={todo.completed}
                     onCheckedChange={() => toggleTodo(todo._id)}
@@ -75,22 +75,25 @@ export default function Todo({ todo }: { todo: Todo }) {
                     </span>
 
                 </div>
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => setEditingTodo(todo)}
-                    className="text-zinc-500 hover:text-zinc-300"
-                >
-                    <Edit2 className="h-4 w-4" />
-                </Button>
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={onDelete}
-                    className="text-zinc-500 hover:text-zinc-300"
-                >
-                    <Trash2 className="h-4 w-4" />
-                </Button>
+                <div className="">
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setEditingTodo(todo)}
+                        className="text-zinc-500 hover:text-blue-500"
+                    >
+                        <Edit2 className="h-4 w-4" />   
+                    </Button>
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={onDelete}
+                        className="text-zinc-500 hover:text-red-500"
+                    >
+                        <Trash2 className="h-4 w-4" />
+                    </Button>
+                </div>
+
             </div >
             <EditTodoModal
                 isOpen={editingTodo != null}
